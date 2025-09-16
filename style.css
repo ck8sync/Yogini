@@ -166,7 +166,11 @@ header .container {
     cursor: pointer;
     color: var(--color-teal);
 }
-
+.logo img {
+    height: 50px; /* Adjust the size as you like */
+    width: auto;
+    display: block;
+}
 
 /* ======== HERO SECTION ======== */
 .hero {
