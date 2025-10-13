@@ -52,7 +52,33 @@
             <div class="container">
                 <div class="about-content">
                     <div class="about-image">
-                        <img src="https://via.placeholder.com/500x550.png/FDFEFE/34495E?text=Graceful+Yoga+Pose" alt="Woman in a graceful yoga pose">
+        </body>
+            <script>
+                // Best Seller badge visibility control
+                (function() {
+                    // Select the badge element
+                    const badge = document.querySelector('.badge-best-seller');
+                    if (!badge) return;
+
+                    // By default, start today. To set a fixed start date, replace `startDate` with a Date, e.g.:
+                    // const startDate = new Date('2025-10-01');
+                    const startDate = new Date();
+
+                    // Calculate end date = start + 3 months
+                    const endDate = new Date(startDate);
+                    endDate.setMonth(endDate.getMonth() + 3);
+
+                    const now = new Date();
+
+                    // Show badge only if now is within [startDate, endDate)
+                    if (now >= startDate && now < endDate) {
+                        badge.style.display = 'inline-block';
+                    } else {
+                        badge.style.display = 'none';
+                    }
+                })();
+            </script>
+                        <img src="assets\graceful-yoga-pose-stockcake.jpg" alt="Woman in a graceful yoga pose">
                     </div>
                     <div class="about-text">
                         <div class="section-title" style="text-align: left; margin-bottom: 2rem;">
@@ -72,7 +98,7 @@
                 </div>
                 <div class="instructor-content">
                     <div class="instructor-image">
-                        <img src="https://via.placeholder.com/300x300.png/8E44AD/FFFFFF?text=Hema+K." alt="Yoga Instructor and Healer, Hema Katral">
+                        <img src="assets\Hema.jpeg" alt="Yoga Instructor and Healer, Hema Katral">
                     </div>
                     <div class="instructor-details">
                         <h3>Hema Katral: Yoga & Energy Healing</h3>
@@ -164,7 +190,7 @@
                 </div>
                 <div class="healing-cta-message">
                     <p>Ready to experience true energetic alignment and healing?</p>
-                    <a href="https://wa.me/910000000000?text=I'm%20interested%20in%20your%20Reiki%20and%20Healing%20modalities." target="_blank" class="btn btn-secondary">Inquire About Healing</a>
+                    <a href="https://wa.me/916361819708?text=I'm%20interested%20in%20your%20Reiki%20and%20Healing%20modalities." target="_blank" class="btn btn-secondary">Inquire About Healing</a>
                 </div>
             </div>
         </section>
@@ -186,6 +212,7 @@
                         <a href="#contact" class="btn btn-secondary">Choose Plan</a>
                     </div>
                     <div class="pricing-card card featured">
+                        <span class="badge-best-seller" role="note" aria-hidden="true">Best Seller</span>
                         <h3>3 Months</h3>
                         <p class="price">₹1,999 <span>/ quarter</span></p>
                         <ul>
@@ -238,7 +265,7 @@
                 <div class="section-title">
                     <h2>Begin Your Journey Today</h2>
                     <p>Have questions or ready to enroll? Reach out via WhatsApp for a prompt and friendly response. I'm here to help you get started!</p>
-                    <a href="https://wa.me/910000000000?text=Hi!%20I'm%20interested%20in%20your%20services." target="_blank" class="btn btn-primary" style="margin-top:1rem;">Connect on WhatsApp</a>
+                    <a href="https://wa.me/916361819708?text=Hi!%20I'm%20interested%20in%20your%20services." target="_blank" class="btn btn-primary" style="margin-top:1rem;">Connect on WhatsApp</a>
                 </div>
             </div>
         </section>
@@ -256,7 +283,7 @@
         </div>
     </footer>
 
-    <a href="https://wa.me/910000000000?text=Hi!%20I'm%20interested%20in%20joining%20the%20yoga%20classes." class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+    <a href="https://wa.me/916361819708?text=Hi!%20I'm%20interested%20in%20joining%20the%20yoga%20classes." class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
 

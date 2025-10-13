@@ -398,6 +398,37 @@ header .container {
     box-shadow: var(--shadow-medium); 
 }
 
+/* Best Seller badge - positioned at the top-left of featured pricing card */
+.badge-best-seller {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: linear-gradient(135deg, var(--color-secondary), #e67e22);
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-family: var(--font-secondary);
+    font-size: 0.9rem;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    z-index: 10;
+    display: inline-block;
+}
+
+/* Ensure pricing card container can position absolute children */
+.pricing-card {
+    position: relative;
+}
+
+@media (max-width: 768px) {
+    .badge-best-seller {
+        top: 12px;
+        left: 12px;
+        padding: 6px 10px;
+        font-size: 0.85rem;
+    }
+}
+
 .pricing-card .price {
     font-size: 3.5rem;
     font-weight: 700;
