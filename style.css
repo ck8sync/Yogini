@@ -15,11 +15,14 @@
     --transition-speed: 0.3s ease;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    scroll-behavior: smooth;
 }
 
 body {
@@ -59,9 +62,15 @@ a {
     transition: color var(--transition-speed);
 }
 
-a:hover, a:focus {
+a:hover {
     color: var(--color-secondary);
-    outline: none;
+}
+
+a:focus {
+    color: var(--color-secondary);
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
+    border-radius: 2px;
 }
 
 section {
@@ -230,10 +239,7 @@ header .container {
     gap: 20px;
 }
 
-/* Remove old animations */
-@keyframes hero-gradient-move {}
-@keyframes btn-bounce {}
-@keyframes card-pop {}
+
 
 
 /* ======== ABOUT SECTION ======== */
@@ -252,6 +258,7 @@ header .container {
 
 .about-image img {
     width: 100%;
+    aspect-ratio: 4 / 3;
     object-fit: cover;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow-medium);
@@ -387,15 +394,16 @@ header .container {
     align-items: stretch;
 }
 
+/* Consolidated .pricing-card rule */
 .pricing-card {
-    /* Inherits from .card */
+    position: relative; /* required for .badge-best-seller */
     padding-bottom: 3rem;
 }
 
 .pricing-card.featured {
     border-color: var(--color-primary);
-    transform: scale(1.05); 
-    box-shadow: var(--shadow-medium); 
+    transform: scale(1.05);
+    box-shadow: var(--shadow-medium);
 }
 
 /* Best Seller badge - positioned at the top-left of featured pricing card */
@@ -413,11 +421,6 @@ header .container {
     box-shadow: 0 6px 18px rgba(0,0,0,0.12);
     z-index: 10;
     display: inline-block;
-}
-
-/* Ensure pricing card container can position absolute children */
-.pricing-card {
-    position: relative;
 }
 
 @media (max-width: 768px) {
