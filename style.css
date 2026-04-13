@@ -700,3 +700,79 @@ footer p {
         margin-top: 10px;
     }
 }
+
+/* ======== PAYMENT MODAL ======== */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Black with opacity */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: var(--color-surface);
+    margin: 15% auto; /* 15% from top and centered */
+    padding: 30px;
+    border-radius: var(--border-radius);
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    box-shadow: var(--shadow-medium);
+    text-align: center;
+}
+
+.close-modal {
+    color: var(--color-text-light);
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-modal:hover,
+.close-modal:focus {
+    color: var(--color-text-dark);
+    text-decoration: none;
+}
+
+.qr-container {
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: var(--border-radius);
+    border: 1px dashed var(--color-border);
+}
+
+.qr-image {
+    width: 200px;
+    height: 200px;
+    margin: 15px auto;
+    display: block;
+    border-radius: 10px;
+    box-shadow: var(--shadow-soft);
+}
+
+.upi-id {
+    font-size: 1.1rem;
+    color: var(--color-primary);
+    margin-top: 10px;
+}
+
+.payment-steps {
+    text-align: left;
+    margin: 20px 0;
+    font-size: 0.95rem;
+    color: var(--color-text-dark);
+}
+.payment-steps p {
+    margin-bottom: 5px;
+    color: var(--color-text-dark);
+}
