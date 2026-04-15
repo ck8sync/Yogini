@@ -187,8 +187,7 @@
                 </div>
                 <div class="healing-cta-message">
                     <p>Ready to experience true energetic alignment and healing?</p>
-                    <a href="https://wa.me/919845583501?text=I'm%20interested%20in%20your%20Reiki%20and%20Healing%20modalities."
-                        target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Inquire About Healing</a>
+                    <a href="#" onclick="openBot(event)" class="btn btn-secondary" aria-label="Open support chat">Inquire About Healing</a>
                 </div>
             </div>
         </section>
@@ -214,23 +213,23 @@
                     <div class="pricing-card card featured">
                         <span class="badge-best-seller" role="note" aria-label="Best Seller">Best Seller</span>
                         <h3>3 Months</h3>
-                        <p class="price">₹2,999 <span>/ quarter</span></p>
+                        <p class="price">₹2,999 <span>/ 3 months</span></p>
                         <ul>
                             <li><i class="fas fa-check"></i> 60 Live Sessions</li>
                             <li><i class="fas fa-check"></i> Flexible Timings</li>
                             <li><i class="fas fa-check"></i> Community Access</li>
-                            <li><i class="fas fa-star"></i> Free T-Shirt</li>
+                            <li><i class="fas fa-star"></i> Complementary T-Shirt</li>
                         </ul>
                         <button onclick="openModal('3 Months', '₹2,999')" class="btn btn-primary">Choose Plan</button>
                     </div>
                     <div class="pricing-card card">
                         <h3>6 Months</h3>
-                        <p class="price">₹5,499 <span>/ half-year</span></p>
+                        <p class="price">₹5,499 <span>/ 6 months</span></p>
                         <ul>
                             <li><i class="fas fa-check"></i> 120 Live Sessions</li>
                             <li><i class="fas fa-check"></i> Flexible Timings</li>
                             <li><i class="fas fa-check"></i> Community Access</li>
-                            <li><i class="fas fa-star"></i> Free T-Shirt &amp; Yoga Mat</li>
+                            <li><i class="fas fa-star"></i> Complementary T-Shirt &amp; Yoga Mat</li>
                         </ul>
                         <button onclick="openModal('6 Months', '₹5,499')" class="btn btn-secondary">Choose Plan</button>
                     </div>
@@ -267,11 +266,10 @@
             <div class="container contact-container">
                 <div class="section-title">
                     <h2>Begin Your Journey Today</h2>
-                    <p>Have questions or ready to enroll? Reach out via WhatsApp for a prompt and friendly response. I'm
+                    <p>Have questions or ready to enroll? Reach out to our assistant for a prompt and friendly response. I'm
                         here to help you get started!</p>
-                    <a href="https://wa.me/919845583501?text=Hi!%20I'm%20interested%20in%20your%20services."
-                        target="_blank" rel="noopener noreferrer" class="btn btn-primary"
-                        style="margin-top:1rem;">Connect on WhatsApp</a>
+                    <a href="#" onclick="openBot(event)" class="btn btn-primary"
+                        style="margin-top:1rem;" aria-label="Open support chat">Start Chat</a>
                 </div>
             </div>
         </section>
@@ -299,8 +297,8 @@
                     <p>4. Send the screenshot on WhatsApp to activate your plan.</p>
                 </div>
 
-                <a id="whatsappConfirmBtn" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary"
-                    style="margin-top: 1rem; width: 100%;">Send Screenshot on WhatsApp</a>
+                <button id="whatsappConfirmBtn" onclick="openPaymentWhatsApp()" class="btn btn-primary"
+                    style="margin-top: 1rem; width: 100%; border:none; cursor:pointer;">Send Screenshot on WhatsApp</button>
             </div>
         </div>
 
@@ -320,10 +318,24 @@
         </div>
     </footer>
 
-    <a href="https://wa.me/919845583501?text=Hi!%20I'm%20interested%20in%20joining%20the%20yoga%20classes."
-        class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
-        <i class="fab fa-whatsapp"></i>
+    <!-- Bot Entry Point -->
+    <a href="#" onclick="openBot(event)" class="chat-float" aria-label="Chat with Assistant">
+        <i class="fas fa-comment-dots"></i>
     </a>
+
+    <!-- Service Bot Modal -->
+    <div id="botModal" class="modal" onclick="closeBot(event)">
+        <div class="modal-content bot-content" onclick="event.stopPropagation()">
+            <div class="bot-header">
+                <img src="assets/logo.png" alt="Yogini" class="bot-avatar" onerror="this.style.display='none'">
+                <div class="bot-title">Yogini Assistant</div>
+                <span class="close-modal bot-close" onclick="closeBot()" style="position: absolute; right: 20px;">&times;</span>
+            </div>
+            <div class="bot-chat" id="botChat">
+                <!-- Chat messages will be injected here -->
+            </div>
+        </div>
+    </div>
 
     <script>
         // Dynamic footer year
@@ -376,13 +388,16 @@
         function openModal(planName, planPrice) {
             document.getElementById('modalPlanName').innerText = planName;
             document.getElementById('modalPlanPrice').innerText = planPrice;
-
-            // Set whatsapp prefilled message
-            const waNumber = '919845583501';
-            const text = `Hi! I have made the payment for the ${planName} plan (${planPrice}). Here is my screenshot.`;
-            document.getElementById('whatsappConfirmBtn').href = `https://wa.me/${waNumber}?text=${encodeURIComponent(text)}`;
-
             document.getElementById('paymentModal').style.display = 'flex';
+        }
+        
+        function openPaymentWhatsApp() {
+            const planName = document.getElementById('modalPlanName').innerText;
+            const planPrice = document.getElementById('modalPlanPrice').innerText;
+            const w1 = "91";
+            const w2 = "9845583501";
+            const text = `Hi! I have made the payment for the ${planName} plan (${planPrice}). Here is my screenshot.`;
+            window.open(`https://wa.me/${w1}${w2}?text=${encodeURIComponent(text)}`, '_blank');
         }
 
         function closeModal(event) {
@@ -390,6 +405,217 @@
             if (!event || event.target.id === 'paymentModal') {
                 document.getElementById('paymentModal').style.display = 'none';
             }
+        }
+
+        // Bot Logic
+        const botData = {
+            services: {
+                question: "Hi! Which service are you interested in today?",
+                options: [
+                    { label: "Yoga Programs", next: "yoga" },
+                    { label: "Wellness & Healing", next: "healing" },
+                    { label: "General Inquiry", next: "general" }
+                ]
+            },
+            yoga: {
+                question: "Great! Find the perfect class to fit your journey. Please select one:",
+                options: [
+                    { label: "Ladies Yoga", next: "whatsapp" },
+                    { label: "Kids Yoga", next: "whatsapp" },
+                    { label: "Prenatal Yoga", next: "whatsapp" },
+                    { label: "Personal Training", next: "whatsapp" }
+                ]
+            },
+            healing: {
+                question: "Wonderful! Achieve spiritual and mental balance. Please select one:",
+                options: [
+                    { label: "Healing Meditation", next: "whatsapp" },
+                    { label: "Chakra Balance", next: "whatsapp" },
+                    { label: "Distance Reiki & Crystal Healing", next: "whatsapp" },
+                    { label: "Angel Healing", next: "whatsapp" },
+                    { label: "Money & Saraswati Reiki", next: "whatsapp" },
+                    { label: "Personalised Lakshmi Yantra", next: "whatsapp" },
+                    { label: "Oracle Card Reading", next: "whatsapp" },
+                    { label: "Feng Shui & More", next: "whatsapp" }
+                ]
+            },
+            general: {
+                question: "No problem! We'd love to help you out.",
+                options: [
+                    { label: "Connect with our team", next: "whatsapp" }
+                ]
+            }
+        };
+
+        function openBot(event) {
+            if (event) event.preventDefault();
+            document.getElementById('botModal').style.display = 'flex';
+            resetBot();
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeBot(event) {
+            if (!event || event.target.id === 'botModal') {
+                document.getElementById('botModal').style.display = 'none';
+                document.body.style.overflow = '';
+            }
+        }
+
+        // ---------- TYPING INDICATOR ----------
+        const YOGI_SVG = `
+          <svg class="bot-yogi" viewBox="0 0 28 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- head -->
+            <circle cx="14" cy="5" r="3.5" fill="#8E44AD"/>
+            <!-- body (breathes) -->
+            <g class="yogi-body">
+              <rect x="11" y="9" width="6" height="9" rx="3" fill="#8E44AD"/>
+              <!-- legs in lotus -->
+              <path d="M8 18 Q6 22 10 22 Q14 22 14 18" fill="#8E44AD"/>
+              <path d="M20 18 Q22 22 18 22 Q14 22 14 18" fill="#8E44AD"/>
+            </g>
+            <!-- arms (rock back and forth) -->
+            <g class="yogi-arm">
+              <line x1="11" y1="12" x2="6"  y2="16" stroke="#8E44AD" stroke-width="2" stroke-linecap="round"/>
+              <line x1="17" y1="12" x2="22" y2="16" stroke="#8E44AD" stroke-width="2" stroke-linecap="round"/>
+            </g>
+          </svg>`;
+
+        function showTyping(delayMs = 900) {
+            const chat = document.getElementById('botChat');
+            const indicator = document.createElement('div');
+            indicator.className = 'bot-typing';
+            indicator.id = 'botTyping';
+            indicator.innerHTML = YOGI_SVG +
+                `<div class="bot-dots">
+                    <span></span><span></span><span></span>
+                 </div>`;
+            chat.appendChild(indicator);
+            scrollToBottom();
+            return new Promise(resolve => setTimeout(() => {
+                indicator.remove();
+                resolve();
+            }, delayMs));
+        }
+
+        function resetBot() {
+            const chat = document.getElementById('botChat');
+            chat.innerHTML = '';
+            showBotQuestion('services');
+        }
+
+        async function showBotQuestion(nodeKey) {
+            await showTyping(900);
+            const chat = document.getElementById('botChat');
+            const node = botData[nodeKey];
+
+            const msgEl = document.createElement('div');
+            msgEl.className = 'bot-msg bot-msg-system';
+            msgEl.innerText = node.question;
+            chat.appendChild(msgEl);
+
+            if (node.options) {
+                const optionsEl = document.createElement('div');
+                optionsEl.className = 'bot-options';
+                node.options.forEach(opt => {
+                    const btn = document.createElement('button');
+                    btn.className = 'bot-btn';
+                    btn.innerText = opt.label;
+                    btn.onclick = () => handleBotSelection(opt.label, opt.next, optionsEl);
+                    optionsEl.appendChild(btn);
+                });
+                chat.appendChild(optionsEl);
+            }
+            scrollToBottom();
+        }
+
+        let currentSelectedService = "";
+
+        function handleBotSelection(label, nextNodeKey, optionsContainer) {
+            const chat = document.getElementById('botChat');
+
+            optionsContainer.remove();
+
+            const msgEl = document.createElement('div');
+            msgEl.className = 'bot-msg bot-msg-user';
+            msgEl.innerText = label;
+            chat.appendChild(msgEl);
+            scrollToBottom();
+
+            if (nextNodeKey === 'whatsapp') {
+                currentSelectedService = label;
+                askForName();
+            } else {
+                showBotQuestion(nextNodeKey);
+            }
+        }
+
+        async function askForName() {
+            await showTyping(800);
+            const chat = document.getElementById('botChat');
+
+            const msgEl = document.createElement('div');
+            msgEl.className = 'bot-msg bot-msg-system';
+            msgEl.innerText = "Awesome! Could you please tell me your name?";
+            chat.appendChild(msgEl);
+
+            const inputContainer = document.createElement('div');
+            inputContainer.className = 'bot-options';
+            inputContainer.style.flexDirection = 'row';
+            inputContainer.style.alignItems = 'center';
+            inputContainer.innerHTML = `
+                <input type="text" id="botUserName" placeholder="Your Name" style="flex:1; padding:10px 15px; border-radius:20px; border:1px solid var(--color-border); font-family:var(--font-secondary); font-size:0.9rem; outline:none;">
+                <button onclick="submitName()" class="btn btn-primary" style="padding:10px 20px; border-radius:20px; border:none; cursor:pointer;">Send</button>
+            `;
+            chat.appendChild(inputContainer);
+            scrollToBottom();
+            document.getElementById('botUserName').focus();
+
+            document.getElementById('botUserName').addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    submitName();
+                }
+            });
+        }
+
+        async function submitName() {
+            const nameInput = document.getElementById('botUserName');
+            const name = nameInput.value.trim();
+            if(!name) return;
+
+            const chat = document.getElementById('botChat');
+            const inputContainer = nameInput.parentElement;
+            inputContainer.remove();
+
+            const msgEl = document.createElement('div');
+            msgEl.className = 'bot-msg bot-msg-user';
+            msgEl.innerText = name;
+            chat.appendChild(msgEl);
+            scrollToBottom();
+
+            await showTyping(850);
+
+            const finalMsg = document.createElement('div');
+            finalMsg.className = 'bot-msg bot-msg-system';
+            finalMsg.innerHTML = `Thanks, <strong>${name}</strong>! 🙏 Click below to connect with us on WhatsApp.<br><br>
+                <button onclick="openWhatsApp('${currentSelectedService}', '${name.replace(/'/g, "\\'")}' )" class="btn btn-primary" style="display:block; padding: 10px; font-size: 0.9rem; width: 100%; border:none; cursor:pointer;">Send WhatsApp Message</button>`;
+            chat.appendChild(finalMsg);
+            scrollToBottom();
+        }
+
+        function openWhatsApp(service, name) {
+            const w1 = "91";
+            const w2 = "9845583501";
+            let text = `Hi! I am ${name} and I'm interested in ${service}.`;
+            if(service === "Connect with our team") {
+                 text = `Hi! I am ${name} and I'd like to know more about your services.`;
+            }
+            // Abstracting WhatsApp open logic safely
+            window.open(`https://wa.me/${w1}${w2}?text=${encodeURIComponent(text)}`, '_blank');
+        }
+
+        function scrollToBottom() {
+            const chat = document.getElementById('botChat');
+            chat.scrollTop = chat.scrollHeight;
         }
     </script>
 
